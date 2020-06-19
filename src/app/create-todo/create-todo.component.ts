@@ -12,11 +12,14 @@ export class CreateTodoComponent implements OnInit {
 
   ngOnInit() {
   }
-  addTodo():void {
+  addTodo(): void {
     this.todoService.addTodo({
-      title: this.todoTitle
+      title: this.todoTitle,
+      status: 'Todo',
+      description: '',
+      createdAt: new Date()
     });
-    
+
     // resets our todoTitle variable to an empty string
     this.todoTitle = '';
   }
