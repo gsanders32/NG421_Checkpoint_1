@@ -15,10 +15,15 @@ export class TodoComponent implements OnInit {
   @Input()todo: ITodo;
   isEditing = false;
   todoTitle = '';
+  todoStyle;
 
   constructor(private todoService: TodoService, private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.todoStyle = {
+      color: this.todo.status === 'Doing' ? 'Blue' : this.todo.status === 'Done' ? 'Green' : 'Red',
+      'text-decoration': this.todo.status === 'Done' ? 'line-through' : 'normal'
+    };
   }
 
   getStatuses() {

@@ -1,26 +1,24 @@
 <div class="view">
     <div class="float-left">
         <div class="row">
-            
         </div>
         <div class="row">
             <label>Title:&nbsp;</label>
-            <label *ngIf="!isEditing" (dblclick)="isEditing = true">{{todo.title}}</label>
+            <label *ngIf="!isEditing" (dblclick)="isEditing = true" [ngStyle]="todoStyle">{{todo.title}}</label>
             <input type="text" *ngIf="isEditing" [(ngModel)]="todo.title" (blur)="isEditing = false">
         </div>
         <div class="row">
             <label>Description:&nbsp;</label>
             <label>{{todo.description}}</label>
         </div>
-    
     </div>
-
     <div class="float-right">
-
         <select [(ngModel)]="todo.status">
             <option *ngFor="let status of getStatuses()"> {{ status }} </option>
         </select> | 
-        <button type="button" (click)=editTodo(todo) class="btn btn-success btn-sm">Edit</button> | 
+        <!-- Disable Edit if done -->
+        <button type="button" (click)=editTodo(todo) class="btn btn-success btn-sm" *ngIf="todo.status != 'Done'">Edit</button>
+        <button type="button" (click)=editTodo(todo) class="btn btn-success btn-sm" *ngIf="todo.status === 'Done'" disabled>Edit</button> | 
         <button type="button" (click)=deleteTodo(todo) class="btn btn-danger btn-sm">Delete</button>    
     </div>
 </div>
